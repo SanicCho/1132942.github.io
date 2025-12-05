@@ -24,7 +24,7 @@ body {
     /* 垂直方向置中 */
     align-items: center; 
     
-    background-color: #f0f2f5;
+    background-color: #001e4a;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
     /* 再設計main的部分與h1 */
@@ -60,3 +60,4 @@ button{ padding:8px 12px; border-radius:10px; border:0;
 background:#21264a; color:var(--text); cursor:pointer; }
 
 button:disabled{ opacity:.5; cursor:not-allowed; }
+
