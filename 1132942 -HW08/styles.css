@@ -11,7 +11,22 @@
      margin:0; font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
      background:var(--bg); color:var(--text); display:grid; place-items:center; padding:24px;
     }
-
+/* 將 body 設為 Flex 容器 */
+body {
+    /* 讓 body 的高度至少佔滿整個視窗高度 */
+    min-height: 100vh; 
+    margin: 0;
+    
+    /* 啟動 Flexbox 模式 */
+    display: flex; 
+    /* 水平方向置中 */
+    justify-content: center; 
+    /* 垂直方向置中 */
+    align-items: center; 
+    
+    background-color: #f0f2f5;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
     /* 再設計main的部分與h1 */
 .container{ width: min(720px, 96%); text-align:center; }
 h1{ margin:0 0 16px 0; font-size:24px; }
@@ -43,4 +58,5 @@ padding:12px; border-radius:14px; width:min(560px, 92%); aspect-ratio:1/1;
 .controls{ margin-top:12px; }
 button{ padding:8px 12px; border-radius:10px; border:0;
 background:#21264a; color:var(--text); cursor:pointer; }
+
 button:disabled{ opacity:.5; cursor:not-allowed; }
