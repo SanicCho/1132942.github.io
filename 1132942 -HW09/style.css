@@ -1,0 +1,134 @@
+:root {
+    --bg-color: #f0f2f5;
+    --board-bg: #ffffff;
+    --primary-color: #4e54c8; /* 按鈕色 */
+    --x-color: #2196f3;       /* X 的顏色 (藍) */
+    --o-color: #ff4757;       /* O 的顏色 (紅) */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --cell-hover: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2c3e50;
+}
+
+#status {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    font-weight: bold;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+/* 棋盤容器 */
+.board {
+    width: 320px;
+    height: 320px;
+    background-color: var(--board-bg);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* 更有質感的陰影 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px; /* 格子間距 */
+    padding: 10px;
+}
+
+/* 格子樣式 */
+.cell {
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    font-size: 3.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none; /* 移除邊框 */
+    transition: all 0.2s ease;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05); /* 內陰影增加層次 */
+}
+
+.cell:hover:not(.taken) {
+    background-color: #e2e6ea;
+    transform: scale(0.98);
+}
+
+/* 已下棋子的樣式 */
+.cell.taken {
+    cursor: default;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* X 和 O 的專屬顏色與動畫 */
+.cell.x {
+    color: var(--x-color);
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.cell.o {
+    color: var(--o-color);
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* 勝利連線高亮 */
+.cell.win {
+    background-color: #ffeaa7;
+    animation: flash 1s infinite alternate;
+}
+
+/* 按鈕優化 */
+button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(78, 84, 200, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 84, 200, 0.6);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* 動畫定義 */
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes flash {
+    from { background-color: #ffeaa7; }
+    to { background-color: #fab1a0; }
+}
