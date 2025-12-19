@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1132942 -HW10</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+    <header>
+        <h1>3D 黑白棋 (Othello)</h1>
+    </header>
+
+    <div class="scoreboard">
+        <div class="score-box player active" id="score-black-box">
+            <div class="icon black-icon"></div>
+            <div class="info">
+                <span>玩家 (黑)</span>
+                <span id="score-black">2</span>
+            </div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="score-box cpu" id="score-white-box">
+            <div class="icon white-icon"></div>
+            <div class="info">
+                <span>電腦 (白)</span>
+                <span id="score-white">2</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <label for="difficulty">電腦難度：</label>
+        <select id="difficulty">
+            <option value="basic">基本 (隨機/貪婪)</option>
+            <option value="advanced" selected>進階 (策略/權重)</option>
+        </select>
+        <button id="new-game-btn">新遊戲</button>
+    </div>
+
+    <div id="message-area">輪到黑棋下子</div>
+
+    <div class="board-wrapper">
+        <div id="board" class="board">
+            </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+:root {
+    --board-color: #2e8b57;
+    --board-border: #1e5c39;
+    --grid-line: #174d2e;
+    --cell-size: 50px; /* 手機版預設 */
+    --piece-size: 40px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* 分數板設計 */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.score-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.score-box.active {
+    background: #444;
+    border: 2px solid #ffd700; /* 亮黃色框表示當前回合 */
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5);
+}
+
+.black-icon { background: #111; border: 1px solid #555; }
+.white-icon { background: #eee; border: 1px solid #ccc; }
+
+.vs { font-weight: bold; color: #888; }
+
+.controls {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+button, select {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+
+button:active { transform: scale(0.95); }
+
+#message-area {
+    height: 30px;
+    margin-bottom: 10px;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* 棋盤設計 */
+.board-wrapper {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px; /* 為3D效果增加透視 */
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    background-color: var(--board-color);
+    border: 8px solid var(--board-border);
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 480px; /* 最大寬度 */
+    aspect-ratio: 1 / 1; /* 保持正方形 */
+    gap: 2px;
+    padding: 2px;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: calc(100% / 8) calc(100% / 8);
+}
+
+.cell {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 合法移動提示點 */
+.cell.valid::after {
+    content: '';
+    width: 20%;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    position: absolute;
+}
+.cell.valid:hover::after {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 3D 棋子結構 */
+.piece {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    transform-style: preserve-3d; /* 關鍵：保留3D變形 */
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.piece .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden; /* 背面隱藏 */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+/* 黑棋面 (正面) */
+.face.front {
+    background: radial-gradient(circle at 30% 30%, #444, #000);
+    transform: rotateY(0deg);
+}
+
+/* 白棋面 (背面) */
+.face.back {
+    background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+    transform: rotateY(180deg);
+}
+
+/* 狀態類別：控制棋子翻轉 */
+/* 如果此格是白棋，將其翻轉 180度 */
+.piece.is-white {
+    transform: rotateY(180deg);
+}
+
+/* 如果此格是黑棋，保持 0度 */
+.piece.is-black {
+    transform: rotateY(0deg);
+}
+
+/* 上次落子位置標記 */
+.last-move::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 4px white;
+}
+
+/* RWD */
+@media (min-width: 500px) {
+    .board {
+        border-width: 12px;
+    }
+}
