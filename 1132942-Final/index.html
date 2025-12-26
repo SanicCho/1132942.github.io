@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1132942 -FinalTerm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="game-info">
+        <h1>九路圍棋</h1>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>對戰模式：</label>
+                <select id="gameMode">
+                    <option value="pve">玩家 vs 電腦</option>
+                    <option value="pvp">玩家 vs 玩家</option>
+                </select>
+            </div>
+            
+            <div class="control-group" id="difficultyGroup">
+                <label>電腦難度：</label>
+                <select id="aiDifficulty">
+                    <option value="easy">新手級 (亂下)</option>
+                    <option value="medium">中等 (基礎判斷)</option>
+                    <option value="hard">困難 (策略評估)</option>
+                </select>
+            </div>
+
+            <button id="btnNewGame" class="btn primary">新局</button>
+            <button id="btnPass" class="btn secondary">虛手 (Pass)</button>
+        </div>
+
+        <div class="status-board">
+            <div class="player-status">
+                <span class="stone-icon black"></span>
+                <span id="blackStatus">黑方 (玩家)</span>
+                <span class="captures">提子: <span id="blackCaptures">0</span></span>
+            </div>
+            <div class="vs">VS</div>
+            <div class="player-status">
+                <span class="stone-icon white"></span>
+                <span id="whiteStatus">白方 (電腦)</span>
+                <span class="captures">提子: <span id="whiteCaptures">0</span></span>
+            </div>
+        </div>
+        
+        <div id="messageArea" class="message">請開始遊戲，黑棋先行</div>
+    </div>
+
+    <div class="board-container">
+        <div id="goBoard" class="go-board"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
